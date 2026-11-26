@@ -184,6 +184,20 @@ elif page == PAGES[2]:
         else: st.success("All implemented scheduling constraints passed validation.")
         st.markdown("### Timetable preview")
         st.dataframe(st.session_state.schedule, use_container_width=True, hide_index=True)
+        st.download_button(
+    label="Download Student Timetable PDF",
+    data=audience_pdf(
+        st.session_state.schedule,
+        st.session_state.data,
+        "students",
+        st.session_state.issues
+    ),
+    file_name="student_exam_timetable.pdf",
+    mime="application/pdf",
+    use_container_width=True,
+    type="primary",
+    key="student_pdf_download"
+)
         st.markdown("### Fitness across generations")
         st.line_chart(st.session_state.history.set_index("Generation")["Fitness"])
 
@@ -214,6 +228,40 @@ elif page == PAGES[3]:
         with staff_tab:
             cols = [x for x in ["SubjectID","SubjectName","Date","Session","StartTime","EndTime","RoomID","InvigilatorID"] if x in df]
             st.dataframe(df[cols], use_container_width=True, hide_index=True)
+                    with staff_tab:
+            cols = [
+                x for x in [
+                    "SubjectID",
+                    "SubjectName",
+                    "Date",
+                    "Session",
+                    "StartTime",
+                    "EndTime",
+                    "RoomID",
+                    "InvigilatorID"
+                ] if x in df
+            ]
+
+            st.dataframe(
+                df[cols],
+                use_container_width=True,
+                hide_index=True
+            )
+
+            st.download_button(
+                label="📥 Download Teacher Allocation PDF",
+                data=audience_pdf(
+                    df,
+                    st.session_state.data,
+                    "teachers",
+                    st.session_state.issues
+                ),
+                file_name="teacher_allocation.pdf",
+                mime="application/pdf",
+                use_container_width=True,
+                type="primary",
+                key="teacher_pdf_download"
+            )
         with checks_tab:
             if st.session_state.issues:
                 st.warning(f"{len(st.session_state.issues)} validation issue(s) detected.")
