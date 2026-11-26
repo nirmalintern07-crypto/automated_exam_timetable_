@@ -42,7 +42,7 @@ h1 {font-weight:800 !important;}
 
 @st.cache_data
 def sample_data():
-    return {name: pd.read_csv(BASE / "data" / f"{name}.csv", dtype=str) for name in REQUIRED}
+    return {name: pd.read_csv((BASE / "data" if (BASE / "data").is_dir() else BASE) / f"{name}.csv", dtype=str) for name in REQUIRED}
 
 if "data" not in st.session_state: st.session_state.data = {k: pd.DataFrame(columns=v) for k,v in REQUIRED.items()}
 if "schedule" not in st.session_state: st.session_state.schedule = None
