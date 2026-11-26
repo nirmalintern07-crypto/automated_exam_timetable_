@@ -1,0 +1,5 @@
+RoomID,Capacity,Status,UnavailableSlots
+R101,2,Available,SL04
+R102,2,Available,
+R103,3,Available,
+R104,20,Unavailable,

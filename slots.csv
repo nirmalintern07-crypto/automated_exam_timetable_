@@ -1,0 +1,5 @@
+SlotID,Date,Session,StartTime,EndTime
+SL01,2026-12-01,Morning,09:00,12:00
+SL02,2026-12-01,Afternoon,14:00,17:00
+SL03,2026-12-02,Morning,09:00,12:00
+SL04,2026-12-02,Afternoon,14:00,17:00
